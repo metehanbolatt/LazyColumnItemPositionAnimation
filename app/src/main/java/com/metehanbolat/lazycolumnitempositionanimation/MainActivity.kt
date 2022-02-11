@@ -44,7 +44,32 @@ class MainActivity : ComponentActivity() {
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-
+                    items(items = items, key = { it }) {
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color.LightGray.copy(alpha = 0.2f))
+                                .padding(24.dp)
+                                .animateItemPlacement(
+                                    animationSpec = tween(
+                                        durationMillis = 600
+                                    )
+                                ),
+                            text = "I Love $it!",
+                            fontSize = MaterialTheme.typography.h5.fontSize,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    item {
+                        Button(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 24.dp),
+                            onClick = { items = items.shuffled() }
+                        ) {
+                            Text(text = "Shuffle")
+                        }
+                    }
                 }
             }
         }
